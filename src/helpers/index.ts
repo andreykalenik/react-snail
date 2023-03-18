@@ -1,0 +1,1 @@
+export {generateStravaURL} from './generateStravaURL'
