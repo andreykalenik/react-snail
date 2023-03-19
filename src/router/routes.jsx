@@ -1,4 +1,4 @@
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import LastActivity   from '../pages/LastActivity'
 import WeekActivites  from '../pages/WeekActivites'
 import MonthActivites  from '../pages/MonthActivites'
@@ -6,7 +6,6 @@ import Layout  from '../components/Layout';
 import LoginPage  from '../pages/LoginPage';
 
 
-let oauthCode = localStorage.getItem('oauth_code')
 
 const createRoutes = () => (
   <>

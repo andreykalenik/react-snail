@@ -1,6 +1,24 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
+import { useEffect} from 'react'
+
 
 const Layout = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+
+  useEffect(() => {
+    if(location.search.includes('code')){
+      const authToken = location.search.split("&")[1].slice(5)
+      localStorage.setItem('authToken', authToken)
+    }
+    if(!localStorage.getItem('authToken')) {
+      navigate('/authorization')
+    } else {
+      navigate('/')
+    }
+  }, [])
+
   return (
     <>
         <header>
@@ -16,3 +34,5 @@ const Layout = () => {
 }
 
 export default Layout
+
+

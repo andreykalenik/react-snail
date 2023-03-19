@@ -1,9 +1,13 @@
-import { useLocation } from "react-router-dom"
+import {getStravaToken} from '../helpers'
 const LastActivity = () =>{
-    console.log(useLocation())
+
+const deleteCode:any = localStorage.removeItem('authToken')
+
     return(
         <>
             <h1>Last Activity</h1>
+            <button onClick={getStravaToken}> get token </button>
+            <button onClick={deleteCode}> delete </button>
         </>
 
     )

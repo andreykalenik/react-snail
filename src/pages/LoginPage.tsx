@@ -1,7 +1,7 @@
-import {generateStravaURL} from '../helpers/generateStravaURL'
+import {getStravaAuthorizationCode} from '../helpers/'
 const LoginPage = () =>{
     const connectToApp = () => {
-        window.location.href = generateStravaURL()
+        window.location.href = getStravaAuthorizationCode()
       }
     return(
         <>

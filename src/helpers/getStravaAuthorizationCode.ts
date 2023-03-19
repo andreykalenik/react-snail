@@ -1,4 +1,4 @@
-export const generateStravaURL = ():string => {
+export const getStravaAuthorizationCode = ():string => {
 
     const сlientID = '103037'
     const redirectURI = 'http://localhost:3000/'
