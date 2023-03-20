@@ -3,6 +3,7 @@ const LastActivity = () =>{
 
 const deleteCode:any = localStorage.removeItem('authToken')
 
+
     return(
         <>
             <h1>Last Activity</h1>

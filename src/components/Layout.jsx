@@ -1,11 +1,15 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
+import { useDispatch } from 'react-redux'
+
+import { fetchUserProfile } from '../store/slices/userProfileSlice'
+
 
 
 const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
-
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(location.search.includes('code')){
@@ -16,6 +20,7 @@ const Layout = () => {
       navigate('/authorization')
     } else {
       navigate('/')
+      //dispatch(fetchUserProfile())
     }
   }, [])
 
