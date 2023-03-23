@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import  userProfileSlice  from './slices/userProfileSlice'
+//import  athleteSlice  from './slices/athleteSlice'
 
+let userProfile, athleteStat, athleteActivites = 100
+let userProfileSlice, athleteStatSlice, athleteActivitesSlice = 100
 
 const store = configureStore({
   reducer: {
     userProfile: userProfileSlice,
-    //athleteActivities: athleteActivitiesSlice,
-    //athleteStats: athleteStatsSlice
+    athleteStat: athleteStatSlice,
+    athleteActivites: athleteActivitesSlice,
   },
 }) 
 

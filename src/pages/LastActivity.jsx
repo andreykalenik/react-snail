@@ -2,6 +2,9 @@ import {getStravaToken} from '../helpers'
 import axios from 'axios'
 const LastActivity = () =>{
 
+    const userProfile =  JSON.parse(localStorage.getItem('userProfile'));
+    const {access_token, athlete: {id}} = userProfile
+
 const deleteCode:any = () =>
 {
     localStorage.removeItem('authToken')
@@ -9,18 +12,14 @@ const deleteCode:any = () =>
 } 
 
 const getStat = () => {
- const id = '91212713'
- const your_access_token = "e70195bb3ef2abbe7fb85faa41f1b044bec349e6"
- 
- axios.get(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${your_access_token}`)
+
+    axios.get(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${access_token}`)
  .then((response) =>console.log(response.data))
 }
 
 const getActivitys = () => {
-    const id = '91212713'
-    const your_access_token = "e70195bb3ef2abbe7fb85faa41f1b044bec349e6"
-    
-    axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${your_access_token}`)
+
+    axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${access_token}`)
     .then((response) =>console.log(response.data))
    }
 

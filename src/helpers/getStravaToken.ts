@@ -9,7 +9,8 @@ export const getStravaToken = ():any => {
 
     axios.post(`https://www.strava.com/oauth/token?client_id=${сlientID}&client_secret=${clientSecret}&code=${code}&grant_type=authorization_code`)
     .then((response) => {
-        return response.data;
+
+        localStorage.setItem('userProfile', JSON.stringify(response.data))
       }, (error) => {
         console.log(error);
       });

@@ -2,7 +2,6 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 
-import { fetchUserProfile } from '../store/slices/userProfileSlice'
 
 
 
@@ -20,7 +19,6 @@ const Layout = () => {
       navigate('/authorization')
     } else {
       navigate('/')
-      //dispatch(fetchUserProfile())
     }
   }, [])
 
