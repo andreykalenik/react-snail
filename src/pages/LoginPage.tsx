@@ -1,4 +1,5 @@
 import {getStravaAuthorizationCode} from '../helpers/'
+
 const LoginPage = () =>{
     const connectToApp = () => {
         window.location.href = getStravaAuthorizationCode()
