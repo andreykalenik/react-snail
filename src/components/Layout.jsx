@@ -1,33 +1,36 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
 import { fetchStravaToken } from "../helpers"
+import { useDispatch } from "react-redux"
+import  fetchAthleteProfile  from '../helpers/fetchAthleteProfile'
+import {fetchProfile} from '../store/slices/athleteProfileSlice'
 
 
 const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch()
 
 
 
   useEffect(() => {
-    if (!localStorage.getItem('userProfile')){
-
+    if(localStorage.getItem('access_token')){
+      fetchAthleteProfile()
+      navigate('/')
+    } else {
+      navigate('/authorization')
     }
-
 
     if(location.search.includes('code')){
-      const authToken = location.search.split("&")[1].slice(5)
-      localStorage.setItem('authToken', authToken)
-    }
-    if(!localStorage.getItem('authToken')) {
-      navigate('/authorization')
-    } else {
       (async() =>{
-       const data =  await fetchStravaToken()
-       await localStorage.setItem('userProfile', JSON.stringify(data))
+        const authToken = await location.search.split("&")[1].slice(5)
+        await localStorage.setItem('authToken', authToken) 
+        const {access_token} =  await fetchStravaToken()
+        await( localStorage.setItem('access_token', access_token))
+        navigate('/')
       })()
-      navigate('/')
     }
+    dispatch(fetchProfile())
   }, [])
 
   return (

@@ -15,12 +15,15 @@ export const fetchStravaToken = async() => {
   const clientSecret = '1d640f9c7ed033730590b8551aa225151fffefe8'
   const code = localStorage.getItem('authToken')
 
-  try{
+  try {
 
-    const { data } = await axios.post<CreateStravaTokenResponse>(`https://www.strava.com/oauth/token?client_id=${сlientID}&client_secret=${clientSecret}&code=${code}&grant_type=authorization_code`)
-    return data
+      const { data } = await axios.post<CreateStravaTokenResponse>(`https://www.strava.com/oauth/token?client_id=${сlientID}&client_secret=${clientSecret}&code=${code}&grant_type=authorization_code`)
+      return data
+
   } catch (error) {
+
     const err = error as AxiosError
     console.log(err.response?.data)
+
   }
 }
