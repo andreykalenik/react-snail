@@ -2,9 +2,9 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
 import { fetchStravaToken } from "../helpers"
 import { useDispatch } from "react-redux"
-import  fetchAthleteProfile  from '../helpers/fetchAthleteProfile'
-import {fetchProfile} from '../store/slices/athleteProfileSlice'
-
+import  checkToken  from '../helpers/checkToken'
+import { fetchProfile } from '../store/slices/athleteProfileSlice'
+import styled from 'styled-components';
 
 const Layout = () => {
   const navigate = useNavigate()
@@ -15,7 +15,7 @@ const Layout = () => {
 
   useEffect(() => {
     if(localStorage.getItem('access_token')){
-      fetchAthleteProfile()
+      checkToken()
       navigate('/')
     } else {
       navigate('/authorization')
@@ -30,20 +30,34 @@ const Layout = () => {
         navigate('/')
       })()
     }
-    dispatch(fetchProfile())
+   dispatch(fetchProfile())
   }, [])
 
   return (
     <>
-        <header>
-            <Link to="/"> Athlete Stat </Link>
-            <Link to="/map"> Map </Link>
-        </header>
+        <Header>
+            <StyledLink to="/"> Athlete Stat </StyledLink>
+            <StyledLink to="/map"> Map </StyledLink>
+        </Header>
         <Outlet />
     </>
 
   )
+
 }
+
+const Header = styled.header`
+min-height: 3.5rem;
+font-size: 2rem;
+background-color:#FC4C02;
+color: #ffffff;
+`
+const StyledLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: none;
+  margin: 1rem;
+  padding: 1rem;
+`;
 
 export default Layout
 

@@ -4,6 +4,7 @@ import axios from 'axios'
 export const fetchProfile = createAsyncThunk(
   'athlete/fetchProfile',
   async function(){
+
     const data = await axios
       .get(`https://www.strava.com/api/v3/athlete`,{
           headers:{
@@ -12,6 +13,7 @@ export const fetchProfile = createAsyncThunk(
       })
 
       return data
+      
   }
 )
 
@@ -32,6 +34,10 @@ const athleteProfileSlice = createSlice({
       state.status = 'resolved'
       state.profile = action.payload.data
     },
+    [fetchProfile.rejected]: (state, action) =>{
+      state.status = 'rejected'
+      state.error = action.payload.response.status
+    }
   }
 })
 

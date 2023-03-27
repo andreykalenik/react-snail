@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const fetchAthleteProfile = async() =>{
+const checkToken = async() =>{
    
     await axios
     .get(`https://www.strava.com/api/v3/athlete`,{
@@ -17,11 +17,11 @@ const fetchAthleteProfile = async() =>{
     .catch((error) => {
         console.log(error)
         console.log("fatall error")
-        localStorage.clear()
-        window.location.reload();
+        //localStorage.clear()
+       // window.location.reload();
     })
  
 
 }
 
-export default fetchAthleteProfile
+export default checkToken
