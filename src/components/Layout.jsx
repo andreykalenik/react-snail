@@ -47,10 +47,14 @@ const Layout = () => {
 }
 
 const Header = styled.header`
+//$color = #FC4C02
 min-height: 3.5rem;
 font-size: 2rem;
 background-color:#FC4C02;
 color: #ffffff;
+/* &hover{
+  background-color: color.blackness(#FC4C02)
+} */
 `
 const StyledLink = styled(Link)`
   color: #ffffff;
