@@ -3,7 +3,7 @@ import { useEffect} from 'react'
 import { fetchStravaToken } from "../helpers"
 import { useDispatch } from "react-redux"
 import  checkToken  from '../helpers/checkToken'
-import { fetchProfile } from '../store/slices/athleteProfileSlice'
+import { fetchProfile, fetchStat } from '../store/slices/athleteProfileSlice'
 import styled from 'styled-components';
 
 const Layout = () => {
@@ -30,7 +30,13 @@ const Layout = () => {
         navigate('/')
       })()
     }
-   dispatch(fetchProfile())
+    const fething = async() => {
+      await dispatch(fetchProfile())
+      await dispatch(fetchStat())
+    }
+
+    fething()
+
   }, [])
 
   return (

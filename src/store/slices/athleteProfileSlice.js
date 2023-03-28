@@ -17,12 +17,31 @@ export const fetchProfile = createAsyncThunk(
   }
 )
 
+export const fetchStat = createAsyncThunk(
+  'athlete/fetchStat',
+  async function(_, {getState}){
+    const { id } =  getState()
+    console.log ('id ---' + id)
+    // const data = await axios
+    //   .get(`https://www.strava.com/api/v3/athletes/${id}/stats`,{
+    //       headers:{
+    //           Authorization:`Bearer ${localStorage.getItem('access_token')}`,
+    //       }
+    //   })
+
+    //   return data
+      
+  }
+)
+
+
 const athleteProfileSlice = createSlice({
   name: "athlete",
   initialState: {
     profile: {},
     status: null,
     error: null,
+    stat: null,
   },
   reducers: {},
   extraReducers:{
@@ -34,9 +53,12 @@ const athleteProfileSlice = createSlice({
       state.status = 'resolved'
       state.profile = action.payload.data
     },
-    [fetchProfile.rejected]: (state, action) =>{
-      state.status = 'rejected'
-      state.error = action.payload.response.status
+    // [fetchProfile.rejected]: (state, action) =>{
+    //   state.status = 'rejected'
+    //   state.error = action.payload.response.status
+    // },
+    [fetchStat.fulfilled]: (state, action) => {
+      state.stat = action.payload
     }
   }
 })

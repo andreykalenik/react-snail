@@ -2,14 +2,18 @@
 
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import {fetchProfile} from '../store/slices/athleteProfileSlice'
+import {fetchStat, fetchProfile} from '../store/slices/athleteProfileSlice'
+
 
 
 const StatPage = () =>{
+
     // const dispatch = useDispatch()
     // useEffect(() => {
-    //     dispatch(fetchProfile())
-    // },[])
+
+    //     dispatch(fetchStat())
+    // },[dispatch])
+    
 return(
     <>
         <h1>StatPage</h1>

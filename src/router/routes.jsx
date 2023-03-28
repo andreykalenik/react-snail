@@ -6,11 +6,11 @@ import LoginPage  from '../pages/LoginPage';
 import MapPage from '../pages/WeekActivites';
 
 
-
 const createRoutes = () => (
+
   <>
     <Route path="/" element={<Layout />}>
-      <Route index element={<StatPage />} />
+      <Route index  element={<StatPage /> } />
       <Route path="map" element={<MapPage />} />
     </Route>
     <Route path="/authorization" element={<LoginPage/>} />
