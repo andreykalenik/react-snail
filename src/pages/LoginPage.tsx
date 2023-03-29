@@ -2,7 +2,11 @@ import {getStravaAuthorizationCode} from '../helpers/'
 
 const LoginPage = () =>{
     const connectToApp = () => {
-        window.location.href = getStravaAuthorizationCode()
+        
+        setTimeout(
+            window.location.href = getStravaAuthorizationCode(),
+            20000
+        )
       }
     return(
         <>

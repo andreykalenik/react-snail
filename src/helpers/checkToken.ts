@@ -17,8 +17,8 @@ const checkToken = async() =>{
     .catch((error) => {
         console.log(error)
         console.log("fatall error")
-        //localStorage.clear()
-       // window.location.reload();
+        localStorage.clear()
+       window.location.reload();
     })
  
 

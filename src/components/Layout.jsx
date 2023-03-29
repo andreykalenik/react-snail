@@ -1,17 +1,12 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
 import { fetchStravaToken } from "../helpers"
-import { useDispatch } from "react-redux"
 import  checkToken  from '../helpers/checkToken'
-import { fetchProfile, fetchStat } from '../store/slices/athleteProfileSlice'
 import styled from 'styled-components';
 
 const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const dispatch = useDispatch()
-
-
 
   useEffect(() => {
     if(localStorage.getItem('access_token')){
@@ -30,13 +25,7 @@ const Layout = () => {
         navigate('/')
       })()
     }
-    const fething = async() => {
-      await dispatch(fetchProfile())
-      await dispatch(fetchStat())
-    }
-
-    fething()
-
+  
   }, [])
 
   return (

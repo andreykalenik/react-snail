@@ -1,9 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
+
 export const fetchProfile = createAsyncThunk(
   'athlete/fetchProfile',
-  async function(){
+  async() => {
 
     const data = await axios
       .get(`https://www.strava.com/api/v3/athlete`,{
@@ -19,17 +20,22 @@ export const fetchProfile = createAsyncThunk(
 
 export const fetchStat = createAsyncThunk(
   'athlete/fetchStat',
-  async function(_, {getState}){
-    const { id } =  getState()
-    console.log ('id ---' + id)
-    // const data = await axios
-    //   .get(`https://www.strava.com/api/v3/athletes/${id}/stats`,{
-    //       headers:{
-    //           Authorization:`Bearer ${localStorage.getItem('access_token')}`,
-    //       }
-    //   })
+  async (_, thunkAPI) => {
+    const { getState , dispatch } = thunkAPI;
 
-    //   return data
+    await dispatch(fetchProfile())
+
+    const id  = await getState().athleteProfile.profile.id
+    console.log ( id )
+    const {data} = await axios
+      .get(`https://www.strava.com/api/v3/athletes/${id}/stats`,{
+          headers:{
+              Authorization:`Bearer ${localStorage.getItem('access_token')}`,
+          }
+      })
+
+    console.log(data)  
+    return data
       
   }
 )

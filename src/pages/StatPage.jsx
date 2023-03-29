@@ -1,18 +1,18 @@
-//import getStat from "../helpers/getAthleteStat"
-
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import {fetchStat, fetchProfile} from '../store/slices/athleteProfileSlice'
+import { fetchStat } from '../store/slices/athleteProfileSlice'
+import { fetcActivites } from '../store/slices/athleteActivitesSlice'
 
 
 
 const StatPage = () =>{
 
-    // const dispatch = useDispatch()
-    // useEffect(() => {
+    const dispatch = useDispatch()
+    useEffect(() => {
 
-    //     dispatch(fetchStat())
-    // },[dispatch])
+        dispatch(fetchStat())
+        dispatch(fetcActivites())
+    },[])
     
 return(
     <>
