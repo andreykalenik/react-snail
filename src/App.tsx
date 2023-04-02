@@ -1,6 +1,9 @@
 import {RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
 import createRoutes  from './router/routes'
 
+import  store  from './store'
+import { Provider } from 'react-redux'
+
 const routes = createBrowserRouter(createRoutesFromElements(createRoutes()))
 
 
@@ -9,7 +12,9 @@ function App() {
   return (
     
       <>
-        <RouterProvider router={routes} />
+        <Provider store={store}>
+          <RouterProvider router={routes} />
+        </Provider>  
       </>
 
   );
