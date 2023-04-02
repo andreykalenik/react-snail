@@ -1,6 +1,7 @@
 import {getStravaAuthorizationCode} from '../helpers/'
 import styled from 'styled-components';
 import AppLogo from '../assets/img/snail-static.svg'
+import {UIorange, UIorangeHover, UIstravaBG, UIstravaBorder} from '../assets/UIColors'
 
 
 const LoginPage = () =>{
@@ -36,30 +37,20 @@ const LoginPage = () =>{
 }
 
 const Body = styled.body`
-        background-color: #f7f7fa;
+        background-color: ${UIstravaBG};
 `
 
-// const Main = styled.main`
-//         @media (min-width: 992px) {
-//             {Container}{
-//                 padding-left: 40px;
-//                 padding-right: 40px;
-//             }
-//         }
-//     }
-// `
 
 const Header = styled.header`
     display: flex;
     align-items: center;
     gap: 16px;
-
     height: 50px;
     padding-left: 16px;
-    border-bottom: 1px solid #f0f0f5;
+    border-bottom: 1px solid ${UIstravaBorder};
     h1{
         font-size: 24px;
-        color: #fc5200;        
+        color: ${UIorange};        
     }
 `
 
@@ -68,7 +59,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    background-color: #fff;
+    background-color: white;
     max-width: 540px;
     padding: 40px 20px;
     margin: 0 auto;
@@ -84,10 +75,10 @@ const Container = styled.div`
          }
 `
 const Button = styled.button`
-    background-color: #fc5200;
-    border-color: #fc5200;
+    background-color: ${UIorange};
+    border-color: ${UIorange};
     border: 1px solid transparent;
-    color: #fff;
+    color: white;
     -webkit-box-align: center;
     border-radius: 4px;
     cursor: pointer;
@@ -97,8 +88,8 @@ const Button = styled.button`
     width: 100%;
     transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
     &:hover{
-        background-color: #cc4200;
-        border-color: #cc4200;
+        background-color: ${UIorangeHover};
+        border-color: ${UIorangeHover};
     }
 `
 
