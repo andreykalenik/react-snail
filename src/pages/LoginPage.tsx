@@ -87,10 +87,14 @@ const Button = styled.button`
     padding: 10px 30px;
     width: 100%;
     transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
-    &:hover{
-        background-color: ${UIorangeHover};
-        border-color: ${UIorangeHover};
+
+    @media (hover: hover) {
+        &:hover{
+            background-color: ${UIorangeHover};
+            border-color: ${UIorangeHover};
+        }
     }
+
 `
 
 export default LoginPage
