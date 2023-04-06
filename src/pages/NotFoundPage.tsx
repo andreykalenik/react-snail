@@ -1,18 +1,32 @@
-import {getStravaAuthorizationCode} from '../helpers/'
-import styled from 'styled-components';
+import { useNavigate } from "react-router-dom"
 import AppLogo from '../assets/img/snail-static.svg'
+import styled from 'styled-components';
 import {UIorange, UIorangeHover, UIstravaBG, UIstravaBorder} from '../assets/UIColors'
-import Button from '../components/Button';
+import type {
+    NavigateOptions,
+    RelativeRoutingType,
+    RouteObject,
+    To,
+  } from "react-router";
 
 
-const LoginPage = () =>{
-    const connectToApp = () => {
-        
-        setTimeout(
-            window.location.href = getStravaAuthorizationCode(),
-            20000
-        )
-      }
+// declare function useNavigate(): NavigateFunction;
+
+interface NavigateFunction {
+  (
+    to: To,
+    options?: {
+      replace?: boolean;
+      state?: any;
+      relative?: RelativeRoutingType;
+    }
+  ): void;
+  (delta: number): void;
+}
+
+
+const NotFoundPage = () =>{
+    const navigate = useNavigate()
     return(
         <Body>
             <Header>
@@ -26,9 +40,9 @@ const LoginPage = () =>{
             </Header>
             <main>
                 <Container>
-                    <h2>Visualising your Strava activities on the OSM map</h2>
-                    <p>React Snail App based on React, Leaflet Map, @mapbox/polyline and Strava API</p>
-                    <Button onClick={connectToApp}>Let's go!</Button>
+                    <h2>Ooops...</h2>
+                    <p>Page not found</p>
+                    <Button onClick={(() => navigate("/"))}>Back to home</Button>
                 </Container>
             </main>
             
@@ -75,6 +89,27 @@ const Container = styled.div`
             padding-right: 106px;
          }
 `
+const Button = styled.button`
+    background-color: ${UIorange};
+    border-color: ${UIorange};
+    border: 1px solid transparent;
+    color: white;
+    -webkit-box-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    line-height: normal;
+    padding: 10px 30px;
+    width: 100%;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
 
+    @media (hover: hover) {
+        &:hover{
+            background-color: ${UIorangeHover};
+            border-color: ${UIorangeHover};
+        }
+    }
 
-export default LoginPage
+`
+
+export default NotFoundPage
