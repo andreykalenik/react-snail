@@ -39,7 +39,7 @@ const HeaderStyles = styled.header`
     align-items: center;
     gap: 16px;
     height: 50px;
-    padding-left: 16px;
+    padding-inline-start: 16px;
     border-bottom: 1px solid ${UIstravaBorder};
     h1{
         font-size: 24px;

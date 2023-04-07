@@ -3,6 +3,7 @@ import { useEffect} from 'react'
 import { fetchStravaToken } from "../helpers"
 import  checkToken  from '../helpers/checkToken'
 import styled from 'styled-components';
+import {UIorange} from '../assets/UIColors'
 
 const Layout = () => {
   const navigate = useNavigate()
@@ -42,20 +43,17 @@ const Layout = () => {
 }
 
 const Header = styled.header`
-//$color = #FC4C02
-min-height: 3.5rem;
-font-size: 2rem;
-background-color:#FC4C02;
-color: #ffffff;
-/* &hover{
-  background-color: color.blackness(#FC4C02)
-} */
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 24px;
+    padding-inline-start: 16px;
+    background-color:${UIorange};
+    color: white;
 `
 const StyledLink = styled(Link)`
-  color: #ffffff;
-  text-decoration: none;
-  margin: 1rem;
-  padding: 1rem;
+    color: white;
+    text-decoration: none;
 `;
 
 export default Layout
