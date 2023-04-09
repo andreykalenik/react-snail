@@ -1,24 +1,12 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetcActivites } from '../store/slices/athleteActivitesSlice'
-
+import { useSelector } from "react-redux"
 import {MapContainer,  Polyline, TileLayer, Tooltip } from 'react-leaflet';
-
-
 import 'leaflet/dist/leaflet.css'
 
 import  polyline   from '@mapbox/polyline'
 
 const MapPage = () =>{
 
-    const dispatch = useDispatch()
 
-    // useEffect(() => {
-
-    //     dispatch(fetcActivites())
-        
-
-    // },[dispatch])
 
 
         const i = 4

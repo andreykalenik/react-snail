@@ -1,13 +1,17 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
+import { useSelector } from "react-redux"
 import { fetchStravaToken } from "../helpers"
 import  checkToken  from '../helpers/checkToken'
 import styled from 'styled-components';
-import {UIorange} from '../assets/UIColors'
+import { UIorange } from '../assets/UIColors'
+import  ResponsiveAppBar  from '../components/AppMenu'
+
 
 const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const {profile_medium, firstname} = useSelector((state) => state.athleteProfile.profile)
 
   useEffect(() => {
     if(localStorage.getItem('access_token')){
@@ -31,10 +35,12 @@ const Layout = () => {
 
   return (
     <>
-        <Header>
+        <ResponsiveAppBar
+          avatarImg = {profile_medium}
+          avatarAlt = {firstname}>
             <StyledLink to="/"> Athlete Stat </StyledLink>
             <StyledLink to="/map"> Map </StyledLink>
-        </Header>
+        </ResponsiveAppBar>
         <Outlet />
     </>
 
@@ -42,16 +48,8 @@ const Layout = () => {
 
 }
 
-const Header = styled.header`
-    display: flex;
-    align-items: center;
-    height: 50px;
-    font-size: 24px;
-    padding-inline-start: 16px;
-    background-color:${UIorange};
-    color: white;
-`
 const StyledLink = styled(Link)`
+    font-size: 24px;
     color: white;
     text-decoration: none;
 `;
