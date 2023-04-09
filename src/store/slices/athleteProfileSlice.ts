@@ -46,12 +46,13 @@ const athleteProfileSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers:(builder) =>{
-    builder.addCase(fetchProfile.fulfilled, (state, action) => {
-      state.profile = action.payload
-    }),
-    builder.addCase(fetchStat.fulfilled, (state, action) => {
-      state.stat = action.payload
-    })
+    builder
+      .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.profile = action.payload
+       })
+      .addCase(fetchStat.fulfilled, (state, action) => {
+       state.stat = action.payload
+      })
   }
 })
 

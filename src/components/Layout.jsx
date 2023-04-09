@@ -4,7 +4,6 @@ import { useSelector } from "react-redux"
 import { fetchStravaToken } from "../helpers"
 import  checkToken  from '../helpers/checkToken'
 import styled from 'styled-components';
-import { UIorange } from '../assets/UIColors'
 import  ResponsiveAppBar  from '../components/AppMenu'
 
 
