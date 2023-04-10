@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom"
 import { useEffect} from 'react'
-import { useSelector } from "react-redux"
+import {  useAppSelector } from '../hook'
 import { fetchStravaToken } from "../helpers"
 import  checkToken  from '../helpers/checkToken'
 import styled from 'styled-components';
@@ -10,7 +10,7 @@ import  ResponsiveAppBar  from '../components/AppMenu'
 const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const {profile_medium, firstname} = useSelector((state) => state.athleteProfile.profile)
+  const {profile_medium, firstname} = useAppSelector((state) => state.athleteProfile.profile)
 
   useEffect(() => {
     if(localStorage.getItem('access_token')){

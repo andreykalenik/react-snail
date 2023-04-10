@@ -1,65 +1,13 @@
-import type { RootState } from '../index'
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
+type athleteProfileState = {
+  profile : userProfile,
+  stat: userStat
 
-export const fetchProfile = createAsyncThunk<userProfileType>(
-  'athlete/fetchProfile',
-  async() => {
+}
 
-    const {data} = await axios
-      .get(`https://www.strava.com/api/v3/athlete`,{
-          headers:{
-              Authorization:`Bearer ${localStorage.getItem('access_token')}`,
-          }
-      })
-
-      return data
-      
-  }
-)
-
-export const fetchStat = createAsyncThunk<userStatType, void, {state: RootState }>(
-  'athlete/fetchStat',
-  async (_, { getState , dispatch }) => {
-    await dispatch(fetchProfile())
-    const id  = await getState().athleteProfile.profile.id
-    const {data} = await axios
-      .get(`https://www.strava.com/api/v3/athletes/${id}/stats`,{
-          headers:{
-              Authorization:`Bearer ${localStorage.getItem('access_token')}`,
-          }
-      })
-
-    return data
-      
-  }
-)
-
-const initialState = {
-  profile: <userProfileType>{},
-  stat: <userStatType>{}
-};
-
-const athleteProfileSlice = createSlice({
-  name: "athlete",
-  initialState: initialState,
-  reducers: {},
-  extraReducers:(builder) =>{
-    builder
-      .addCase(fetchProfile.fulfilled, (state, action) => {
-        state.profile = action.payload
-       })
-      .addCase(fetchStat.fulfilled, (state, action) => {
-       state.stat = action.payload
-      })
-  }
-})
-
-
-export default athleteProfileSlice.reducer
-
-type userProfileType = {
+type userProfile = {
   "id": number,
   "username": string,
   "resource_state": string,
@@ -76,13 +24,13 @@ type userProfileType = {
   "updated_at": string,
   "badge_type_id": number,
   "weight": number,
-  "profile_medium": null | string,
+  "profile_medium": string,
   "profile": null | string,
   "friend": null | number,
   "follower": null | number
 }
 
-type userStatType = {
+type userStat = {
     biggest_ride_distance: null | number,
     biggest_climb_elevation_gain: null |number,
     recent_ride_totals: ActivitesStat,
@@ -104,4 +52,63 @@ type userStatType = {
     elevation_gain: number,
     achievement_count?: number
  } 
+
+
+export const fetchProfile = createAsyncThunk<userProfile>(
+  'athlete/fetchProfile',
+  async() => {
+
+    const {data} = await axios
+      .get(`https://www.strava.com/api/v3/athlete`,{
+          headers:{
+              Authorization:`Bearer ${localStorage.getItem('access_token')}`,
+          }
+      })
+
+      return data
+      
+  }
+)
+
+export const fetchStat = createAsyncThunk<userStat, undefined, {state:{athleteProfile: athleteProfileState }}>(
+  'athlete/fetchStat',
+  async (_, { getState , dispatch }) => {
+    await dispatch(fetchProfile())
+    const id  = await getState().athleteProfile.profile.id
+    const {data} = await axios
+      .get(`https://www.strava.com/api/v3/athletes/${id}/stats`,{
+          headers:{
+              Authorization:`Bearer ${localStorage.getItem('access_token')}`,
+          }
+      })
+
+    return data
+      
+  }
+)
+
+const initialState = {
+  profile: <userProfile>{},
+  stat: <userStat>{}
+};
+
+const athleteProfileSlice = createSlice({
+  name: "athlete",
+  initialState: initialState,
+  reducers: {},
+  extraReducers:(builder) =>{
+    builder
+    .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.profile = action.payload
+       })
+      .addCase(fetchStat.fulfilled, (state, action) => {
+       state.stat = action.payload
+      })
+  }
+})
+
+
+export default athleteProfileSlice.reducer
+
+
 

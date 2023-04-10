@@ -1,21 +1,29 @@
-import { useSelector } from "react-redux"
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hook'
+import { fetcActivites} from '../store/slices/athleteActivitesSlice'
 import {MapContainer,  Polyline, TileLayer, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
-
 import  polyline   from '@mapbox/polyline'
+
 
 const MapPage = () =>{
 
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetcActivites(1))
+    },[dispatch])
 
 
 
         const i = 4
-        const listActivites =  useSelector((state) => state.athleteActivites.activities)
+        const listActivites =  useAppSelector((state) => state.athleteActivites.activities)
         const last =  listActivites[i]
         const {end_latlng} = last
         const {map: {summary_polyline}} = last
 
-        const track = polyline.decode(summary_polyline);
+        
+        const track  = polyline.decode(summary_polyline)
 
 
         const j = 3
@@ -38,7 +46,7 @@ const MapPage = () =>{
             <MapContainer
                 center={end_latlng}
                  zoom={12}
-                 scrollWheelZoom={false}
+                 scrollWheelZoom={true}
                  style={{ height: "90vh" }}
                  >
                 <TileLayer

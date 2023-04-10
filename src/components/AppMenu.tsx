@@ -10,10 +10,15 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import AppLogo from '../assets/img/snail-static-white.svg'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {UIorange} from '../assets/UIColors'
+
+type AppBarProps = {
+  children: React.ReactNode;
+  avatarImg: string ,
+  avatarAlt: string ,
+}
 
 const theme = createTheme({
   palette: {
@@ -77,13 +82,6 @@ const theme = createTheme({
 });
 
 
-type AppBarProps = {
-    children: React.ReactNode;
-    avatarImg: string,
-    avatarAlt: string,
-}
-
-
 
 const pages = ['Athlete Stat', ' Activites Map'];
 const settings = ['Profile', 'Account', '', 'Logout'];
@@ -112,12 +110,12 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
         <AppBar position="sticky" >
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-                <img 
+                {/* <img 
                             src = {AppLogo}
                             width = "36px"
                             height= "36px"
                             alt = "React Logo"
-                        />
+                        /> */}
             <Typography
                 variant="h3"
                 noWrap
@@ -173,7 +171,17 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                 ))}
                 </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <Box sx={{
+                marginInlineStart:'-10px',
+                marginInlineEnd: '16px'
+                }}>
+              <img 
+                      src = {AppLogo}
+                      width = "38px"
+                      height= "38px"
+                      alt = "React Logo"
+                  />
+            </Box>
             <Typography
                 variant="h3"
                 noWrap
@@ -188,9 +196,10 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                fontSize: '24px'
                 }}
             >
-                LOGO
+                React Snail App
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', gap: '16px' } }}>
               {children}

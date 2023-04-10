@@ -1,54 +1,13 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-
-
-
-export const fetcActivites = createAsyncThunk<
-  athleteActiviteType[],
-  number
-  >(
-    'activites/fetch',
-    async (page = 1) => {
-
-      const {data} = await axios
-        .get(`https://www.strava.com/api/v3/athlete/activities?per_page=50&page=${page}`,{
-            headers:{
-                Authorization:`Bearer ${localStorage.getItem('access_token')}`,
-            }
-        })
-
-      return data
-        
-    }
-  )
-
-const initialState = {
-    activities: [] as Array<athleteActiviteType>,
-  };
-
-const athleteActivitesSlice = createSlice({
-    name: "activites",
-    initialState: initialState,
-    reducers:{},
-    extraReducers:(builder) => {
-      builder.addCase(fetcActivites.fulfilled, (state, action) => {
-        state.activities = action.payload
-      })
-
-    },
-
-})
-
-export default athleteActivitesSlice.reducer
-
-type athleteActiviteType =  {
+export type athleteActiviteState =  {
   "resource_state" : number,
   "athlete" : {
     "id" : number,
     "resource_state" : number
   },
-  "name" : "Happy Friday",
+  "name" : string,
   "distance" : number,
   "moving_time" : number,
   "elapsed_time" : number,
@@ -56,7 +15,7 @@ type athleteActiviteType =  {
   "type" : string,
   "sport_type" : string,
   "workout_type" : any,
-  "id" : 154504250376823,
+  "id" : number,
   "external_id" : string,
   "upload_id" : number,
   "start_date" : string,
@@ -75,7 +34,7 @@ type athleteActiviteType =  {
   "photo_count" : number,
   "map" : {
     "id" : string,
-    "summary_polyline" : null|string,
+    "summary_polyline" : string,
     "resource_state" : number
   },
   "trainer" : boolean,
@@ -101,4 +60,42 @@ type athleteActiviteType =  {
   "has_kudoed" : boolean,
   "suffer_score" : number
 }
+
+
+
+export const fetcActivites = createAsyncThunk<athleteActiviteState[],number>(
+    'activites/fetch',
+    async (page = 1) => {
+
+      const {data} = await axios
+        .get(`https://www.strava.com/api/v3/athlete/activities?per_page=50&page=${page}`,{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('access_token')}`,
+            }
+        })
+
+      return data
+        
+    }
+  )
+
+const initialState = {
+    activities: [] as Array<athleteActiviteState>,
+  };
+
+const athleteActivitesSlice = createSlice({
+    name: "activites",
+    initialState: initialState,
+    reducers:{},
+    extraReducers:(builder) => {
+      builder.addCase(fetcActivites.fulfilled, (state, action) => {
+        state.activities = action.payload
+      })
+
+    },
+
+})
+
+export default athleteActivitesSlice.reducer
+
 
