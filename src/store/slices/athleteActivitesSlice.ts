@@ -63,8 +63,8 @@ export type athleteActiviteState =  {
 
 
 
-export const fetcActivites = createAsyncThunk<athleteActiviteState[],number|undefined>(
-    'activites/fetch',
+export const getLastActivite = createAsyncThunk<athleteActiviteState[],number|undefined>(
+    'activites/getLast',
     async (page = 1) => {
 
       const {data} = await axios
@@ -81,6 +81,7 @@ export const fetcActivites = createAsyncThunk<athleteActiviteState[],number|unde
 
 const initialState = {
     activities: [] as Array<athleteActiviteState>,
+    list:[] as Array<athleteActiviteState>
   };
 
 const athleteActivitesSlice = createSlice({
@@ -88,10 +89,11 @@ const athleteActivitesSlice = createSlice({
     initialState: initialState,
     reducers:{},
     extraReducers:(builder) => {
-      builder.addCase(fetcActivites.fulfilled, (state, action) => {
+      builder
+      .addCase(getLastActivite.fulfilled, (state, action) => {
         state.activities = action.payload
+        state.list.push(state.activities[0])
       })
-
     },
 
 })

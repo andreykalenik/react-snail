@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hook'
-import { fetcActivites} from '../store/slices/athleteActivitesSlice'
+import { getLastActivite} from '../store/slices/athleteActivitesSlice'
+import { UIorange } from '../assets/UIColors';
 import {MapContainer,  Polyline, TileLayer, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 import  polyline   from '@mapbox/polyline'
@@ -10,9 +11,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 
 const MapPage = () =>{
@@ -20,39 +19,22 @@ const MapPage = () =>{
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        //dispatch(fetcActivites(1))
-    },[])
 
+         dispatch(getLastActivite())
+    },[dispatch])
 
-
-        const i = 4
-        const listActivites =  useAppSelector((state) => state.athleteActivites.activities)
-        const last =  listActivites[i]
-        const {end_latlng} = last
-        const {map: {summary_polyline}} = last
-
-        
-        const track  = polyline.decode(summary_polyline)
-
-
-        const j = 3
-
-        const last2 =  listActivites[j]
-        const summary_polyline2 = last2.map.summary_polyline
-
-        const track2 = polyline.decode(summary_polyline2);
+        const list =  useAppSelector((state) => state.athleteActivites.list)
+        const {end_latlng} = list[0]
 
     
 
-
-     const limeOptions = { color: 'red' }
 
      const [value, setValue] = React.useState(0);
 
     return(
         
         <>
-            { listActivites === undefined ? <Spiner/> :
+            { list[0] === undefined ? <Spiner/> :
                 <>
                     <Box sx={{ width: 1, px: 24}}>
                         <BottomNavigation
@@ -78,18 +60,21 @@ const MapPage = () =>{
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Polyline pathOptions={limeOptions} positions={track} > 
-                            <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
-                                distance: {last.distance} m <br/>
-                                max speed: {last.max_speed} km/h
-                            </Tooltip>
-                        </Polyline>
-                        <Polyline pathOptions={{ color: 'blue' }} positions={track2} > 
-                            <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
-                                distance: {last2.distance / 1000} km <br/>
-                                max speed: {last2.max_speed} km/h
-                            </Tooltip>
-                        </Polyline>
+                        {list.map((item) =>(
+                            
+                            <Polyline pathOptions={{color: `${UIorange}`}} positions={polyline.decode(item.map.summary_polyline)} > 
+                                <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
+                                    <p>{item.name}</p> 
+                                    distance: {(item.distance/1000).toFixed(1)} km <br/>
+                                    time: {(item.moving_time/60).toFixed(1)} min <br/>
+                                    max speed: {item.max_speed.toFixed(1)} km/h
+                                </Tooltip>
+                            </Polyline>
+                        ))
+                        }
+
+                        
+
                     </MapContainer> 
                 </>
             }
