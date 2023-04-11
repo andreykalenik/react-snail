@@ -4,15 +4,15 @@ import { fetcActivites} from '../store/slices/athleteActivitesSlice'
 import {MapContainer,  Polyline, TileLayer, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 import  polyline   from '@mapbox/polyline'
-
+import Spiner from "../components/Spiner"
 
 const MapPage = () =>{
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetcActivites(1))
-    },[dispatch])
+        //dispatch(fetcActivites(1))
+    },[])
 
 
 
@@ -43,31 +43,35 @@ const MapPage = () =>{
         
         <>
             <h1>MapPage</h1>
-            <MapContainer
-                center={end_latlng}
-                 zoom={12}
-                 scrollWheelZoom={true}
-                 style={{ height: "90vh" }}
-                 >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Polyline pathOptions={limeOptions} positions={track} > 
-                    <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
-                        distance: {last.distance} m <br/>
-                        max speed: {last.max_speed} km/h
-                    </Tooltip>
-                </Polyline>
-                <Polyline pathOptions={{ color: 'blue' }} positions={track2} > 
-                    <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
-                        distance: {last2.distance} m <br/>
-                        max speed: {last2.max_speed} km/h
-                    </Tooltip>
-                </Polyline>
-            </MapContainer> 
-            {
-                listActivites.map((item) => <p key={item.id}> {item.type} distance {item.distance} m </p>)
+            { listActivites === undefined ? <Spiner/> :
+                <>
+                    <MapContainer
+                        center={end_latlng}
+                        zoom={12}
+                        scrollWheelZoom={true}
+                        style={{ height: "90vh" }}
+                        >
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Polyline pathOptions={limeOptions} positions={track} > 
+                            <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
+                                distance: {last.distance} m <br/>
+                                max speed: {last.max_speed} km/h
+                            </Tooltip>
+                        </Polyline>
+                        <Polyline pathOptions={{ color: 'blue' }} positions={track2} > 
+                            <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
+                                distance: {last2.distance} m <br/>
+                                max speed: {last2.max_speed} km/h
+                            </Tooltip>
+                        </Polyline>
+                    </MapContainer> 
+                    {
+                        listActivites.map((item) => <p key={item.id}> {item.type} distance {item.distance} m </p>)
+                    }
+                </>
             }
         </>
 

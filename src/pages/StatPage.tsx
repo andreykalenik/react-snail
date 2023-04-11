@@ -11,7 +11,7 @@ const StatPage = () =>{
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(fetchStat())
-        //dispatch(fetcActivites(1))
+        dispatch(fetcActivites(1))
     },[dispatch])
 
     const {recent_ride_totals, all_ride_totals, ytd_ride_totals,
