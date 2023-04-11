@@ -37,8 +37,9 @@ const Layout = () => {
         <ResponsiveAppBar
           avatarImg = {profile_medium}
           avatarAlt = {firstname}>
-            <StyledLink to="/"> Athlete Stat </StyledLink>
             <StyledLink to="/map"> Map </StyledLink>
+            <StyledLink to="/stat"> Athlete Stat </StyledLink>
+
         </ResponsiveAppBar>
         <Outlet />
     </>

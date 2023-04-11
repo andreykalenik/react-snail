@@ -201,7 +201,7 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
             >
                 React Snail App
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', gap: '16px' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', gap: '24px' } }}>
               {children}
             </Box>
 

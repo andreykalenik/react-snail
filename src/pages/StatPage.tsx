@@ -9,6 +9,7 @@ import Spiner from "../components/Spiner"
 const StatPage = () =>{
 
     const dispatch = useAppDispatch()
+    
     useEffect(() => {
         dispatch(fetchStat())
         dispatch(fetcActivites(1))
