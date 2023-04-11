@@ -2,6 +2,7 @@ import PageTemplate from "../components/PageTemplate";
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from '../hook'
 import { fetchProfile } from '../store/slices/athleteProfileSlice'
+import { fetcActivites} from '../store/slices/athleteActivitesSlice'
 import styled from "styled-components";
 import Spiner from "../components/Spiner";
 
@@ -11,6 +12,7 @@ const WelcomePage:React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchProfile())
+        dispatch(fetcActivites())
     },[dispatch])
 
     const {profile_medium, firstname, lastname, country, state} = useAppSelector((state) => state.athleteProfile.profile)

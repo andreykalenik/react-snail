@@ -6,6 +6,15 @@ import 'leaflet/dist/leaflet.css'
 import  polyline   from '@mapbox/polyline'
 import Spiner from "../components/Spiner"
 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+
 const MapPage = () =>{
 
     const dispatch = useAppDispatch()
@@ -38,18 +47,32 @@ const MapPage = () =>{
 
      const limeOptions = { color: 'red' }
 
+     const [value, setValue] = React.useState(0);
 
     return(
         
         <>
-            <h1>MapPage</h1>
             { listActivites === undefined ? <Spiner/> :
                 <>
+                    <Box sx={{ width: 1, px: 24}}>
+                        <BottomNavigation
+                            showLabels
+                            value={value}
+                            onChange={(event, newValue) => {
+                            setValue(newValue);
+                            }}
+                        >
+                            <BottomNavigationAction label="Last Activite"  />
+                            <BottomNavigationAction label="Last 4 weeks "  />
+                            <BottomNavigationAction label="Last year" />
+                            <BottomNavigationAction label="The all time" />
+                        </BottomNavigation>
+                    </Box>
                     <MapContainer
                         center={end_latlng}
                         zoom={12}
                         scrollWheelZoom={true}
-                        style={{ height: "90vh" }}
+                        style={{ height: 'calc(100vh - (106px)' }}
                         >
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -63,14 +86,11 @@ const MapPage = () =>{
                         </Polyline>
                         <Polyline pathOptions={{ color: 'blue' }} positions={track2} > 
                             <Tooltip direction="bottom" offset={[0, 20]} opacity={1} sticky>
-                                distance: {last2.distance} m <br/>
+                                distance: {last2.distance / 1000} km <br/>
                                 max speed: {last2.max_speed} km/h
                             </Tooltip>
                         </Polyline>
                     </MapContainer> 
-                    {
-                        listActivites.map((item) => <p key={item.id}> {item.type} distance {item.distance} m </p>)
-                    }
                 </>
             }
         </>

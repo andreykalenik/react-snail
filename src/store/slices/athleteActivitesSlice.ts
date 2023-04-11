@@ -63,7 +63,7 @@ export type athleteActiviteState =  {
 
 
 
-export const fetcActivites = createAsyncThunk<athleteActiviteState[],number>(
+export const fetcActivites = createAsyncThunk<athleteActiviteState[],number|undefined>(
     'activites/fetch',
     async (page = 1) => {
 
