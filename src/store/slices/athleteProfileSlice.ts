@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-type athleteProfileState = {
+export type athleteProfileState = {
   profile : userProfile,
   stat: userStat
 

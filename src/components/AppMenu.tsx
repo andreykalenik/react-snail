@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AppLogo from '../assets/img/snail-static-white.svg'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {UIorange} from '../assets/UIColors'
+import { useNavigate } from "react-router-dom"
 
 type AppBarProps = {
   children: React.ReactNode;
@@ -83,9 +84,6 @@ const theme = createTheme({
 
 
 
-const pages = ['Athlete Stat', ' Activites Map'];
-const settings = ['Profile', 'Account', '', 'Logout'];
-
 const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAlt}) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -105,17 +103,13 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
     setAnchorElUser(null);
   };
 
+  const navigate = useNavigate()
+
   return (
     <ThemeProvider theme={theme}>
         <AppBar position="sticky" >
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-                {/* <img 
-                            src = {AppLogo}
-                            width = "36px"
-                            height= "36px"
-                            alt = "React Logo"
-                        /> */}
             <Typography
                 variant="h3"
                 noWrap
@@ -126,7 +120,7 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'sans-serif',
                 fontSize: '24px',
-                fontWeight: 700,
+                fontWeight: 500,
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
@@ -164,11 +158,15 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                     display: { xs: 'block', md: 'none' },
                 }}
                 >
-                {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+
+                    <MenuItem key={'Map'} onClick={(() => navigate("/map"))}>
+                    <Typography textAlign="center">Map</Typography>
                     </MenuItem>
-                ))}
+
+                    <MenuItem key={'Athlete Stat'} onClick={(() => navigate("/stat"))}>
+                    <Typography textAlign="center">Athlete Stat</Typography>
+                    </MenuItem>
+
                 </Menu>
             </Box>
             <Box sx={{
@@ -192,11 +190,11 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
                 fontFamily: 'sans-serif',
-                fontWeight: 700,
+                fontWeight: 500,
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
-                fontSize: '24px'
+                fontSize: '20px'
                 }}
             >
                 React Snail App
@@ -227,11 +225,18 @@ const  ResponsiveAppBar: React.FC<AppBarProps> = ({children, avatarImg, avatarAl
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+
+                    <MenuItem key={'Profile'} onClick={(() => navigate("/"))}>
+                    <Typography textAlign="center">Profile</Typography>
                     </MenuItem>
-                ))}
+                    <MenuItem key={'Logout'} 
+                            onClick={(() => {
+                              localStorage.clear()
+                              window.location.reload();
+                            })}>
+                    <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                
                 </Menu>
             </Box>
             </Toolbar>

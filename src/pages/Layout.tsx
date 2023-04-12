@@ -33,7 +33,7 @@ const Layout = () => {
   }, [])
 
   return (
-    <>
+    <main>
         <ResponsiveAppBar
           avatarImg = {profile_medium}
           avatarAlt = {firstname}>
@@ -42,7 +42,7 @@ const Layout = () => {
 
         </ResponsiveAppBar>
         <Outlet />
-    </>
+    </main>
 
   )
 

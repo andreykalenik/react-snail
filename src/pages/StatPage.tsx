@@ -1,19 +1,9 @@
-import { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from '../hook'
-import { fetchStat } from '../store/slices/athleteProfileSlice'
-import { getLastActivite} from '../store/slices/athleteActivitesSlice'
+import { useAppSelector } from '../hook'
 import StatTable from '../components/StatTable'
 import styled from 'styled-components';
 import Spiner from "../components/Spiner"
 
 const StatPage = () =>{
-
-    const dispatch = useAppDispatch()
-    
-    useEffect(() => {
-        dispatch(fetchStat())
-        dispatch(getLastActivite())
-    },[dispatch])
 
     const {recent_ride_totals, all_ride_totals, ytd_ride_totals,
          recent_run_totals, all_run_totals, ytd_run_totals,
