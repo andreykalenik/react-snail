@@ -1,4 +1,5 @@
-import axios, {AxiosError}  from 'axios'
+import { STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET } from '../constants';
+import axios  from 'axios'
 
   type CreateStravaTokenResponse  = {
     token_type: string,
@@ -11,13 +12,9 @@ import axios, {AxiosError}  from 'axios'
 
 export const fetchStravaToken = async() => {
   
-  const сlientID = '103037'
-  const clientSecret = '1d640f9c7ed033730590b8551aa225151fffefe8'
-  const code = localStorage.getItem('authToken')
+  const sesion_authToken = localStorage.getItem('authToken')
 
-  
-
-      const { data } = await axios.post<CreateStravaTokenResponse>(`https://www.strava.com/oauth/token?client_id=${сlientID}&client_secret=${clientSecret}&code=${code}&grant_type=authorization_code`)
+      const { data } = await axios.post<CreateStravaTokenResponse>(`https://www.strava.com/oauth/token?client_id=${STRAVA_CLIENT_ID}&client_secret=${STRAVA_CLIENT_SECRET}&code=${sesion_authToken}&grant_type=authorization_code`)
       return data
 
 
