@@ -22,12 +22,11 @@ Clone https://github.com/andreykalenik/react-snail/ and follow directions to set
 
 Create .env.local file in root directory and add the following variables. In this example, the URIs are the endpoints are from the flask app.
 ```
-REACT_APP_AUTH_URI = 'http://localhost:3000/strava_authorize'
-REACT_APP_TOKEN_URI = 'http://localhost:3000/strava_token'
-
-REACT_APP_GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'
+CLIENT_ID = 'YOUR_STRAVA_APP_CLIENT_ID'
+CLIENT_SECRET = 'YOUR_STRAVA_APP_CLIENT_SECRET'
+REDIRECT_URI = 'http://localhost:3000/'
 or
-REACT_APP_MAP_BOX_ACCESS_TOKEN = 'YOUR_MAP_BOX_ACCESS_TOKEN'
+REDIRECT_URI = 'YOUR_REDIRECT_URI_URL:port'
 ```
 
 Start react app
