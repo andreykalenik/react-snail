@@ -20,13 +20,11 @@ This is app that does the following:
 
 Clone https://github.com/andreykalenik/react-snail/ and follow directions to setup and start app.
 
-Create .env.local file in root directory and add the following variables. More information about [STAVA API](https://developers.strava.com/docs/getting-started/).
+Edit the file in the root directory if necessary . More information about [STAVA API](https://developers.strava.com/docs/getting-started/).
 ```
-CLIENT_ID = 'YOUR_STRAVA_APP_CLIENT_ID'
-CLIENT_SECRET = 'YOUR_STRAVA_APP_CLIENT_SECRET'
-REDIRECT_URI = 'http://localhost:3000/'
-or
-REDIRECT_URI = 'YOUR_REDIRECT_URI_:port'
+REACT_APP_CLIENT_ID = 'YOUR_STRAVA_APP_CLIENT_ID'
+REACT_APP_CLIENT_SECRET = 'YOUR_STRAVA_APP_CLIENT_SECRET'
+REACT_APP_REDIRECT_URI = 'YOUR_REDIRECT_URI_:port'
 ```
 
 Start react app
