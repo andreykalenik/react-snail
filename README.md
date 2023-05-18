@@ -29,6 +29,14 @@ REACT_APP_CLIENT_SECRET = 'YOUR_STRAVA_APP_CLIENT_SECRET'
 REACT_APP_REDIRECT_URI = 'YOUR_REDIRECT_URI_:port'
 ```
 
+
+Install react app 
+
+```
+npm install --legacy-peer-deps
+```
+
+
 Start react app
 
 ```
