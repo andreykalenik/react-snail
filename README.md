@@ -43,6 +43,10 @@ Start react app
 npm start
 ```
 
+## DEMO
+
+Video Russian language https://youtu.be/bZti-rQMANE
+
 ## Warning !!!
 
 Users from Russia and Belarus must use VPN to access Strava.
